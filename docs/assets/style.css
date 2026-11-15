@@ -2,14 +2,14 @@
   --bg: #f7f7f5; --surface: #ffffff; --text: #1d2228; --muted: #5b6672; --line: #dfe3e8;
   --accent: #0b5cad; --ok: #1a7f37; --warn: #9a6700; --bad: #b42318;
   --a: #1d4ed8; --b: #15803d; --c: #c2410c; --code-bg: #f0f2f5;
-  --a-bg: #e3ebfd; --b-bg: #dff3e6; --c-bg: #fde9dc;
+  --a-bg: #e3ebfd; --b-bg: #dff3e6; --c-bg: #fde9dc; --bad-bg: #fdeeec; --key-bg: #fff8c5; --imp: #e8590c; --imp-bg: #fff1e5;
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #15181c; --surface: #1d2126; --text: #e6e9ed; --muted: #9aa5b1; --line: #343b44;
     --accent: #6cb0f5; --ok: #4ac26b; --warn: #d4a72c; --bad: #f47067;
     --a: #8fb2ff; --b: #6fd08c; --c: #f5a26f; --code-bg: #262b32;
-    --a-bg: #1f2c4d; --b-bg: #1c3626; --c-bg: #40281a;
+    --a-bg: #1f2c4d; --b-bg: #1c3626; --c-bg: #40281a; --bad-bg: #33201f; --key-bg: #3a3212; --imp: #ff8a4c; --imp-bg: #3d2414;
   }
 }
 * { box-sizing: border-box; }
@@ -82,8 +82,18 @@ blockquote.checkpoint.ok { border-left-color: var(--ok); }
 .chip { display: inline-block; font-size: .82rem; font-weight: 600; padding: .05rem .55rem; border-radius: 1rem; border: 1px solid currentColor; color: var(--muted); }
 .chip.ok { color: var(--ok); } .chip.unknown { color: var(--warn); }
 .chip + .chip-detail { color: var(--muted); font-size: .88rem; margin-left: .5rem; }
-details { margin: .8rem 0; border: 1px dashed var(--line); border-radius: .4rem; padding: .3rem .9rem; }
-summary { cursor: pointer; color: var(--muted); font-weight: 600; }
+/* key idea box: <div class="key" style="..."> in the .md; the inline style is for plain previews */
+.key { background: var(--key-bg) !important; color: var(--text) !important; border-left: 4px solid var(--warn) !important;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body.print .key { background: #fff8c5 !important; color: #000 !important; }
+/* important box (orange): <div class="important" style="..."> */
+.important { background: var(--imp-bg) !important; color: var(--text) !important; border-left: 4px solid var(--imp) !important;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body.print .important { background: #fff1e5 !important; color: #000 !important; }
+/* every <details> in the guide is an "If it went wrong" box */
+details { margin: .8rem 0; border-left: 3px solid var(--bad); border-radius: .4rem; padding: .35rem .9rem; background: var(--bad-bg);
+  -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+summary { cursor: pointer; color: var(--bad) !important; font-weight: 600; } /* overrides the inline colour the .md carries for plain previews */
 
 /* steps */
 ul.steps { list-style: none; padding-left: 0; }

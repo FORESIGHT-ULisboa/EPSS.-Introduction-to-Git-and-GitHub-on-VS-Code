@@ -25,7 +25,7 @@ Member A starts by pressing **Use this template** on this page. Do not clone thi
 | Path | What |
 |---|---|
 | `TEAM.md` | the file you edit in Part 1 |
-| `weather/` | three small functions to write, one per member (Part 2) |
+| `weather/` | three small functions, written but switched off as comments, one per member (Part 2) |
 | `report.py` | the script that uses the three functions |
 | `analysis.ipynb` | the shared notebook (Part 3) |
 | `data/station.csv` | one year of synthetic daily weather data |
