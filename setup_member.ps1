@@ -51,7 +51,9 @@ Git config --local user.name $cfg['GIT_USER_NAME']
 Git config --local user.email $cfg['GIT_USER_EMAIL']
 
 if ($cfg['GITHUB_TOKEN']) {
-  Copy-Item (Join-Path $PSScriptRoot 'git-credential-env.sh') $helper -Force
+  # sh needs LF line endings whatever the checkout produced
+  $sh = (Get-Content (Join-Path $PSScriptRoot 'git-credential-env.sh') -Raw) -replace "`r`n", "`n"
+  [IO.File]::WriteAllText($helper, $sh)
   # an empty first value discards the system helper (Git Credential Manager) for this clone
   Git config --local --unset-all credential.helper 2>$null
   Git config --local --add credential.helper $empty
