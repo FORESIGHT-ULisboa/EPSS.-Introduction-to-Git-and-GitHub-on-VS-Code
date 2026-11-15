@@ -1,0 +1,7 @@
+.env
+*.env
+!.env.example
+groups.txt
+out/
+dist/
+__pycache__/
