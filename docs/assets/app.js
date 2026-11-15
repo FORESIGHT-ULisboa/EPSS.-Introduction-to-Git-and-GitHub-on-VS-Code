@@ -136,7 +136,7 @@ function showStatus(st, note) {
 
   const when = new Date(st.updated).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   $("source").textContent = `${st.done} of ${st.total} · ${st.repo} · ` +
-    (localMode ? `this computer, ${when}` : `GitHub, ${when} (can lag a few minutes)`);
+    (localMode ? `this computer, ${when}` : `GitHub, ${when} (up to 5 minutes behind; Check now is immediate)`);
   const next = st.checkpoints.find((c) => c.ok === false);  // only the next one explains itself
   st.checkpoints.forEach((c) => {
     const [cls, sign, word] = MARK[String(c.ok)];
@@ -182,7 +182,7 @@ async function refresh(viaApi = false) {
   if (!repo) return showStatus(null, "Paste your group's repository address below to see which checkpoints are verified.");
   const url = viaApi
     ? `https://api.github.com/repos/${repo}/contents/status.json?ref=tutorial-status`
-    : `https://raw.githubusercontent.com/${repo}/tutorial-status/status.json?t=${Date.now()}`;
+    : `https://raw.githubusercontent.com/${repo}/tutorial-status/status.json`;  // cached ~5 min by GitHub
   try {
     const r = await fetch(url, { cache: "no-store", headers: viaApi ? { Accept: "application/vnd.github.raw+json" } : {} });
     if (r.status === 403 || r.status === 429) return showStatus(null, "GitHub asks to slow down. Wait a minute, or run Tutorial: check progress in VS Code.");
