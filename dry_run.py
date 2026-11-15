@@ -96,6 +96,19 @@ def accept_both(text):
     return "".join(l for l in text.splitlines(True) if not l.startswith(("<<<<<<< ", "=======", ">>>>>>> ")))
 
 
+def switch_on(text):
+    """Guide 2.2: delete the raise line, then Toggle Line Comment on the '# ' lines below it."""
+    out, after = [], False
+    for line in text.splitlines():
+        if "raise NotImplementedError" in line:
+            after = True
+            continue
+        if after and line.lstrip().startswith("# "):
+            line = line.replace("# ", "", 1)
+        out.append(line)
+    return "\n".join(out) + "\n"
+
+
 def paste_report(text, lines):
     marker = "below this line ---\n\n# --- members"
     assert marker in text, "report.py markers changed"
@@ -146,8 +159,7 @@ def main():
     args = ap.parse_args()
     src = args.main or main_checkout()
     code = snippets(src)
-    need = {"weather/stats.py", "weather/temperature.py", "weather/plots.py", "report:A", "report:B", "report:C",
-            "notebook:A", "notebook:B"}
+    need = {"report:A", "report:B", "report:C", "notebook:A", "notebook:B"}
     ok(need <= set(code), f"guide contains the {len(need)} code snippets")
 
     work = Path(tempfile.mkdtemp(prefix="epss-git-dry-"))
@@ -211,7 +223,7 @@ def main():
     for m in (A, B, C):
         branch, module = tasks[m.name]
         m.git("checkout", "-q", "-b", branch)
-        m.write(module, code[module])
+        m.write(module, switch_on(m.read(module)))
         m.write("report.py", paste_report(m.read("report.py"), code[f"report:{m.name}"]))
         r = run([sys.executable, "report.py"], m.dir)
         ok("days loaded" in r.stdout, f"{m.name}: report.py runs on {branch}")

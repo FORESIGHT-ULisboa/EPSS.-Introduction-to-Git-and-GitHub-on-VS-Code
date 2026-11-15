@@ -1,7 +1,7 @@
 <#
 Give ONE clone the identity of a tutorial member, to play members A, B and C on one PC.
 
-    .\setup_member.ps1 C:\work\epss-git-demo\memberB\epss-git-tutorial-g00
+    .\setup_member.ps1 C:\EPSS_git_demo\A\epss-git-tutorial-g01
     .\setup_member.ps1 <clone> -Undo
 
 Reads a .env (see .env.example) from the clone folder or, if absent, from its parent folder.

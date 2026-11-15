@@ -22,8 +22,13 @@ Run the Python scripts from an **Anaconda Prompt with `epss` activated** (`conda
 ## In class: the dashboard
 
 1. Students do one thing (guide, step 0.2): member A pastes the repository address into your class sheet.
-2. Either copy the addresses into `groups.txt` (one per line; any other text on the line becomes the label, e.g. `G07 https://github.com/ana/epss-git-tutorial-g07`), or publish the sheet as CSV (**File › Share › Publish to web › CSV**) and pass its link.
-3. `python dashboard.py groups.txt` or `python dashboard.py --sheet "https://docs.google.com/…output=csv"`.
+2. Either copy the addresses into `groups.txt` (one per line; any other text on the line becomes the label, e.g. `G01 https://github.com/ana/epss-git-tutorial-g01`), or pass the sheet's CSV link. If the sheet is shared as "anyone with the link", replace `/edit?usp=sharing` with `/export?format=csv` (add `&gid=<n>` for a tab other than the first); otherwise publish it (**File › Share › Publish to web › CSV**).
+3. Run one of:
+
+   ```
+   python dashboard.py groups.txt
+   python dashboard.py --sheet "https://docs.google.com/spreadsheets/d/<SHEET_ID>/export?format=csv"
+   ```
 
 The page shows groups × the eight checkpoints, a red **broken** flag when a group's last commit has conflict markers, a notebook that is not valid, or a syntax error, and a **quiet N min** flag when nothing has moved for 10 minutes (`--stuck`). The list is re-read every round (`--every`, 45 s), so groups appear as they register. It only reads; it uses your `gh` sign-in to avoid GitHub's rate limit.
 
@@ -41,9 +46,9 @@ To see it without any group: `python dry_run.py` then `python dashboard.py --fak
 4. Three folders outside OneDrive, each with a `.env` made from `.env.example`:
 
    ```text
-   C:\work\epss-git-demo\memberA\.env     MEMBER=A, your name and email, GITHUB_USER and GITHUB_TOKEN empty
-   C:\work\epss-git-demo\memberB\.env     MEMBER=B, name, email, user and token of account B
-   C:\work\epss-git-demo\memberC\.env     MEMBER=C, name, email, user and token of account C
+   C:\EPSS_git_demo\A\.env     MEMBER=A, your name and email, GITHUB_USER and GITHUB_TOKEN empty
+   C:\EPSS_git_demo\B\.env     MEMBER=B, name, email, user and token of account B
+   C:\EPSS_git_demo\C\.env     MEMBER=C, name, email, user and token of account C
    ```
 
    The email must be one registered in that GitHub account, or the commits will not show the account's picture.
@@ -51,11 +56,11 @@ To see it without any group: `python dry_run.py` then `python dashboard.py --fak
 **Each take**
 
 1. As A, in the browser: create the group repository from the template and invite B and C (guide 0.2). Accept the invitations in profiles B and C.
-2. Clone it three times with **Git: Clone** in VS Code, into `memberA`, `memberB` and `memberC` (guide 0.3). The repository is public, so cloning needs no sign-in.
+2. Clone it three times with **Git: Clone** in VS Code, into `A`, `B` and `C` (guide 0.3). The repository is public, so cloning needs no sign-in.
 3. Off camera, once per clone:
 
    ```powershell
-   .\setup_member.ps1 C:\work\epss-git-demo\memberB\epss-git-tutorial-g00
+   .\setup_member.ps1 C:\EPSS_git_demo\A\epss-git-tutorial-g01
    ```
 
    It reads the `.env` from the clone or its parent folder and, **in that clone only**: sets the commit name and email; makes git take the token from the `.env` when pushing (the token is not copied anywhere); colours the VS Code window and titles it `MEMBER B`; stops VS Code from offering its own GitHub sign-in. It prints which GitHub user the token belongs to. `-Undo` removes all of it. Reload the VS Code window afterwards (**Developer: Reload Window**).
@@ -66,12 +71,13 @@ To see it without any group: `python dry_run.py` then `python dashboard.py --fak
 **Things to know while recording**
 
 - The two other accounts' user names and pictures will be visible in the video and in screenshots.
-- The step-by-step click paths were written from knowledge of VS Code and github.com, not checked on screen against the versions installed here. The recording run is that check. The places most likely to differ: the wording of the first sign-in prompt (1.1), the rejected-push message (1.2), the ruleset form (2.1), **Accept All Incoming** in the Source Control right-click menu (3.1), and where **Clear All Outputs** sits in the notebook toolbar (3.1). Correct the guide where the screen disagrees.
+- Click paths checked on screen in the first recording run (VS Code 1.145, Nov 2026): first sign-in (*Connect to GitHub* window), rejected-push message, merge **Continue** button, ruleset form, pull request and review pages, **Branch › Merge…** list, **Clear All Outputs**. Not yet seen on screen: **Accept All Incoming** in the Source Control right-click menu (3.1), **Start a review** on a line comment (2.4), the macOS sign-in variant. Correct the guide where the screen disagrees.
+- During a recording, **Sync Changes** hides the rejected push in 1.2: C must use **`···` › Push**. And leave the team name alone until 1.3.
 - Delete the two tokens on GitHub after recording.
 
 ## Screenshots
 
-The guide refers to 25 images in `docs/img/` on `main`. They are grey placeholders until you save a real screenshot under the same name (PNG, about 1280 px wide). `python make_placeholders.py --list` prints each file name with what it must show. After replacing them: `python build_pdf.py`.
+The guide refers to 37 images in `docs/img/` on `main`. They are grey placeholders until you save a real screenshot under the same name (PNG, about 1280 px wide). `python make_placeholders.py --list` prints each file name with what it must show. After replacing them: `python build_pdf.py`.
 
 ## After editing the guide
 
