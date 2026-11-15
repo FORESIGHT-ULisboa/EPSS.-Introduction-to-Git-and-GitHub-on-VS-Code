@@ -43,7 +43,7 @@ Git stamps your name and email on every commit. GitHub uses the email to link th
 The third line tells Git what to do when you and a teammate both have new work: combine the two (a *merge*). Without it, Git stops and asks.
 
 <details>
-<summary>If it went wrong</summary>
+<summary style="color: #e5484d">⚠️ <b>If it went wrong</b></summary>
 
 - *`git` is not recognized*: Git is not installed, or VS Code was open while you installed it. Install it from git-scm.com, then close and reopen VS Code.
 - You made a typing mistake: type the line again. The new value replaces the old one.
@@ -56,21 +56,24 @@ A *repository* (repo) is the project folder together with its whole history. You
 
 - [ ] **A** In the browser, sign in to github.com and open <https://github.com/FORESIGHT-ULisboa/epss-git-tutorial>.
 - [ ] **A** Click the green **Use this template** button, then **Create a new repository**.
-- [ ] **A** *Owner*: yourself. *Repository name*: `epss-git-tutorial-g07` (with your group number). Choose **Public**. Leave *Include all branches* unticked. Click **Create repository**.
 
-![GitHub: Use this template, Create a new repository](../img/01-use-template.png)
+![GitHub: the Use this template button on the template's page](../img/01-use-template.png)
+
+- [ ] **A** *Owner*: yourself. *Repository name*: `epss-git-tutorial-g01` (with your group number). *Choose visibility*: **Public**. Leave *Include all branches* **Off**. Click **Create repository**.
+
+![GitHub: Create a new repository, with owner, name and Public visibility filled in](../img/01a-use-template.png)
 
 - [ ] **A** In the new repository: **Settings › Collaborators › Add people**. Type B's GitHub user name, select it, **Add to repository**. Do the same for C.
 
 ![GitHub: Settings, Collaborators, Add people](../img/02-add-collaborators.png)
 
-- [ ] **A** Copy the address of the repository page (`https://github.com/your-name/epss-git-tutorial-g07`). Paste it into the class sheet your teacher shared, and send it to B and C.
+- [ ] **A** Copy the address of the repository page (`https://github.com/your-name/epss-git-tutorial-g01`). Paste it into the class sheet your teacher shared, and send it to B and C.
 - [ ] **B + C** Open the address A sent and add `/invitations` at the end, or open the email GitHub just sent you. Click **Accept invitation**.
 
 ![GitHub: Accept invitation](../img/03-accept-invitation.png)
 
 <details>
-<summary>If it went wrong</summary>
+<summary style="color: #e5484d">⚠️ <b>If it went wrong</b></summary>
 
 - *No invitation*: A checks the spelling of the user name in **Settings › Collaborators**; the invitation is listed there as pending.
 - B or C skips this step: everything works until their first push, which GitHub then refuses.
@@ -94,6 +97,14 @@ To *clone* is to copy the repository, with its history, from GitHub to your comp
 
 You now have the same files on three computers. Look at the bottom-left corner of VS Code: it says `main`. That is the *branch* you are on; more about branches in Part 2.
 
+<details>
+<summary style="color: #e5484d">⚠️ <b>If it went wrong</b></summary>
+
+- *`Python: Select Interpreter` is not in the list*: VS Code opened the folder in **Restricted Mode**, which switches the Python extension off. The words **Restricted Mode** are then in the bottom-left corner of the window: click them, then click **Trust**. Still not in the list: the *Python* extension is missing; install it from the Extensions view (**Ctrl+Shift+X**).
+- *`epss` is not among the interpreters*: the environment was not created. Go back to the course installation guide, step 2.
+
+</details>
+
 ## 0.4 Check your progress
 
 The repository can check by itself how far your group is.
@@ -109,9 +120,9 @@ The check lists eight checkpoints for the group, then the state of your own comp
 > **Checkpoint 1.** The check shows `[x] 1  Group repository created from the template` on all three computers.
 
 <details>
-<summary>If it went wrong</summary>
+<summary style="color: #e5484d">⚠️ <b>If it went wrong</b></summary>
 
-- *Run Task shows nothing or fails*: you skipped `Python: Select Interpreter`, or opened the wrong folder. Use **File › Open Folder** and pick the folder that Git created (it contains `TEAM.md`).
+- *Run Task shows nothing or fails*: you skipped `Python: Select Interpreter`, the window is in Restricted Mode (see 0.3), or you opened the wrong folder. Use **File › Open Folder** and pick the folder that Git created (it contains `TEAM.md`).
 
 </details>
 

@@ -22,15 +22,15 @@ Member A goes through the full loop once: **edit → look → stage → commit �
 
 ![VS Code: commit message and Commit button](../img/09-commit.png)
 
-The commit now exists, but only on A's computer. The button says **Sync Changes 1↑**: one commit waiting to go up.
+The commit now exists, but only on A's computer. The button says **Sync Changes 1↑**: one commit waiting to go up. **Do not click that button yet.** It pulls and pushes in one go and hides what happens; until the guide says otherwise, you do the two by hand, from the **`···`** menu.
 
-- [ ] **A** Click the **`···`** menu at the top of the Source Control view, then **Push**.
+- [ ] **A** Click the **`···`** menu near the top of the Source Control view, next to the repository name, then **Push**.
 
 ![VS Code: the More Actions menu with Pull and Push](../img/10-push-menu.png)
 
-- [ ] **A** The first time, VS Code asks to sign in to GitHub. Click **Allow**; a browser page opens; sign in and click **Authorize**; go back to VS Code. (On some computers a small *Connect to GitHub* window appears instead: choose **Sign in with your browser**.)
+- [ ] **A** The first time, a small **Connect to GitHub** window appears. Click **Sign in with your browser**; a browser page opens; sign in and click **Authorize**; go back to VS Code. (On a Mac, VS Code itself asks to sign in to GitHub instead: click **Allow**, then continue in the browser in the same way.)
 
-![Browser: authorize VS Code to use your GitHub account](../img/11-sign-in.png)
+![The Connect to GitHub window, with the Sign in with your browser button](../img/11-sign-in.png)
 
 - [ ] **A** Refresh the repository page in the browser. `TEAM.md` shows your details and your commit message.
 - [ ] **B + C** In the Source Control view: **`···` › Pull**. Open `TEAM.md`: A's details have arrived.
@@ -39,7 +39,7 @@ The commit now exists, but only on A's computer. The button says **Sync Changes 
 > **Checkpoint 2.** A's details are in `TEAM.md` on github.com and on all three computers.
 
 <details>
-<summary>If it went wrong</summary>
+<summary style="color: #e5484d">⚠️ <b>If it went wrong</b></summary>
 
 - *Commit does nothing or asks about staging*: nothing was staged. Click **+** on the file first.
 - *Author identity unknown*: go back to step 0.1.
@@ -53,7 +53,7 @@ Now B and C work at the same moment, as happens in any group.
 
 - [ ] **B + C** At the same time: fill in **your own** section of `TEAM.md`, save, stage (**+**) and commit with the message `Add member B to the team` (C: `member C`). **Do not push yet.**
 - [ ] **B** **`···` › Push**. It works. Tell C.
-- [ ] **C** **`···` › Push**. GitHub refuses: *Can't push refs to remote. Try running "Pull" first to integrate your changes.*
+- [ ] **C** **`···` › Push** (not the blue button). GitHub refuses: *Can't push refs to remote. Try running "Pull" first to integrate your changes.*
 
 ![VS Code: push rejected message](../img/12-push-rejected.png)
 
@@ -66,14 +66,23 @@ Nothing is lost. GitHub has a commit (B's) that C does not have yet, and it neve
 
 ![VS Code: Source Control Graph showing the merge](../img/13-graph-merge.png)
 
-From now on you may use the blue **Sync Changes** button instead: it does a pull and then a push in one click.
-
 <!-- checkpoint: everyone -->
 > **Checkpoint 3.** All three sections are filled in on github.com, and the Graph shows a merge.
 
+<details>
+<summary style="color: #e5484d">⚠️ <b>If it went wrong</b></summary>
+
+- *C's push was not refused*: C clicked **Sync Changes**, which pulled B's commit before pushing. Nothing is broken, and the Graph shows the same merge. You will meet the refused push in 1.3.
+
+</details>
+
 ## 1.3 Two people, the same line: a conflict
 
-Git can combine changes to different lines. When two people change the **same** line, it cannot know who is right. It stops and asks you. That is a *conflict*. It is normal, and solving it takes a minute.
+<div class="key" style="background: #fff8c5; color: #1f2328; border-left: 4px solid #d4a72c; border-radius: 6px; padding: 0.1em 1em; margin: 1em 0">
+
+💡 Git can combine changes to different lines. When two people change the **same** line, it cannot know who is right. It stops and asks you. That is a *conflict*. It is normal, and solving it takes a minute.
+
+</div>
 
 - [ ] **A + B** **Without telling each other what you write**: in `TEAM.md`, replace `(to be decided)` on the `Team name:` line by a name you like. Save, stage, commit with the message `Choose a team name`. Do not push yet.
 - [ ] **A** **`···` › Push**. It works. Tell B.
@@ -81,25 +90,27 @@ Git can combine changes to different lines. When two people change the **same** 
 - [ ] **B** Click `TEAM.md`. Git has put both versions in the file:
 
   ```text
-  <<<<<<< HEAD
-  Team name: The Cumulonimbus           (Current Change: yours)
+  <<<<<<< HEAD (Current Change)
+  Team name: Rain check
   =======
-  Team name: Rain Check                 (Incoming Change: your teammate's)
-  >>>>>>> 3f9e0c2
+  Team name: The cumulonimbus
+  >>>>>>> 013570ef8ac5b1f398af99e66585df956d0988ff (Incoming Change)
   ```
+
+  *Current Change* is B's own line. *Incoming Change* is A's line, which the pull just brought. The words in brackets are added by VS Code and are not in the file; the long code after `>>>>>>>` is the name of A's commit.
 
 ![VS Code: a conflict in TEAM.md with Accept Current, Accept Incoming, Accept Both](../img/14-conflict.png)
 
 - [ ] **All** Agree on one name. This is the real work: a conflict is a question for people, not for Git.
 - [ ] **B** Click **Accept Current Change** or **Accept Incoming Change** just above the block. (Or type the agreed name yourself and delete the three marker lines.) No line starting with `<<<<<<<`, `=======` or `>>>>>>>` may remain. Save.
-- [ ] **B** Click **+** on `TEAM.md`: this tells Git the conflict is solved. Click **Commit** (the message is already written), then **Sync Changes**.
+- [ ] **B** Click **+** on `TEAM.md`: this tells Git the conflict is solved. Click **Continue** (the Commit button has that name while a merge is open; the message is already written), then **Sync Changes**. From here on you may use this blue button: it does a pull and then a push in one click.
 - [ ] **A + C** **`···` › Pull**. Everybody has the agreed name.
 
 <!-- checkpoint: conflict -->
 > **Checkpoint 4.** One team name on github.com, and no marker lines anywhere.
 
 <details>
-<summary>If it went wrong</summary>
+<summary style="color: #e5484d">⚠️ <b>If it went wrong</b></summary>
 
 - *Lost in the middle of the conflict*: press **Ctrl+Shift+P**, type `Git: Abort Merge`, Enter. Everything is back as it was before the pull. Then pull again and take it slowly.
 - *VS Code opened a view with three panes*: that is the Merge Editor, a bigger tool for the same job. Tick the version to keep, then **Complete Merge**.
