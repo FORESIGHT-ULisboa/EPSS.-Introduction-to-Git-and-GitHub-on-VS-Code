@@ -291,9 +291,11 @@ def print_table(st):
         print(f" {box[c['ok']]} {n}  {c['title']}")
         if c["detail"] and c["ok"] is not True:
             print(f"        -> {c['detail']}")
-    print(f"\n {st['done']} of {st['total']} done.\n\nYour computer")
-    for key, value in local_state():
-        print(f"  {key:<9}{value}")
+    print(f"\n {st['done']} of {st['total']} done.")
+    if st["source"] == "local":
+        print("\nYour computer")
+        for key, value in local_state():
+            print(f"  {key:<9}{value}")
     if st["problems"]:
         print("\nProblems to fix")
         for p in st["problems"]:
