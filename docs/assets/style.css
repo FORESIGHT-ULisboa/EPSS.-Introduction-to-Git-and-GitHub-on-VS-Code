@@ -104,6 +104,7 @@ body[data-role="A"] { --role: var(--a); } body[data-role="B"] { --role: var(--b)
 body.print .top, body.print .panel, body.print .copy, body.print .chip, body.print .chip-detail { display: none; }
 body.print li.step.other { opacity: 1; } body.print li.step.mine { background: none; box-shadow: none; }
 body.print { background: #fff; color: #000; font-size: 11pt; }
+@page { size: A4; margin: 15mm 14mm; }
 @media print {
   .top, .panel, .copy { display: none; }
   .part { break-before: page; } .part:first-child { break-before: auto; }
